@@ -11,14 +11,22 @@ namespace NumberGuessingGame.Models
         private GuessedNumber _lastGuessedNumber;
         private int? _number;
         private int _numberOfGuesses;
-        const int MaxNumberOfGuesses = 7;
+        public const int MaxNumberOfGuesses = 7;
 
-        //Properties
+        //Properties 
+        public int? Number
+        {
+            get
+            {
+                return _number;
+            }
+        }
+
         public bool CanMakeGuess
         {
             get
             {
-                if (_guessedNumbers.Count > MaxNumberOfGuesses)
+                if (Count >= MaxNumberOfGuesses)
                 {
                     return false;
                 }
@@ -60,29 +68,55 @@ namespace NumberGuessingGame.Models
         //Methods
         public void Initialize()
         {
-            _number = 100; //Fixa random
+            _guessedNumbers = null;
+            _number = 32; //Fixa random
         }
 
         public Outcome MakeGuess(int guess)
         {
-            if (guess != _number)
+            GuessedNumber newGuess = new GuessedNumber();
+            Outcome guessOutcome = Outcome.Indefinite;
+            Count++;
+            if (Count <= MaxNumberOfGuesses)
             {
-                Count++;
-                if (guess < _number)
+                if (guess != _number)
                 {
-                    return Outcome.Low;
-                }
-                else if (guess > _number)
-                {
-                    return Outcome.High;
+                    foreach (GuessedNumber guessedNumber in _guessedNumbers)
+                    {
+                        if (guess == guessedNumber.Number)
+                        {
+                            Count--;
+                            guessOutcome = Outcome.OldGuess;
+                            break;
+                        }
+                    }
+
+                    if (guess < _number)
+                    {
+                        guessOutcome = Outcome.Low;
+                    }
+                    else if (guess > _number)
+                    {
+                        guessOutcome = Outcome.High;
+                    }
                 }
                 else if (guess == _number)
                 {
-                    return Outcome.Right;
+                    guessOutcome = Outcome.Right;
                 }
             }
 
-            return Outcome.Indefinite;
+            else
+            {
+                guessOutcome = Outcome.NoMoreGuesses;
+            }
+
+            newGuess.Number = guess;
+            newGuess.Outcome = guessOutcome;
+            _guessedNumbers.Add(newGuess);
+            _lastGuessedNumber = newGuess;
+
+            return guessOutcome;
         }
     }
 
