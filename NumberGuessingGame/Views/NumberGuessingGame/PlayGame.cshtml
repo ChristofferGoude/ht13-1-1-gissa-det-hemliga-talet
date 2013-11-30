@@ -1,0 +1,16 @@
+﻿@model NumberGuessingGame.Models.SecretNumber
+
+@{
+    ViewBag.Title = "Börja gissa!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if(Model.CanMakeGuess)
+{
+    <div>
+        @using (Html.BeginForm("NewGuess", "NumberGuessingGame"))
+        {
+            @Html.TextBox("guess")
+            <input type="submit" name="NewGuess" value="Gissa!" />
+        }
+    </div>
+}

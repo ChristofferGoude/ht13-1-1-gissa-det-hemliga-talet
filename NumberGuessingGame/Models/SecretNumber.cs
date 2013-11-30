@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel;
 
 namespace NumberGuessingGame.Models
 {
@@ -37,6 +38,7 @@ namespace NumberGuessingGame.Models
             }
         }
 
+        [DisplayName("Tidigare gissningar")]
         public IReadOnlyList<GuessedNumber> GuessedNumbers
         {
             get
@@ -68,15 +70,21 @@ namespace NumberGuessingGame.Models
         //Methods
         public void Initialize()
         {
+            Count = 0;
             _guessedNumbers = null;
-            _number = 32; //Fixa random
+            var rnd = new Random();
+            _number = rnd.Next(1, 101);
         }
 
         public Outcome MakeGuess(int guess)
         {
             GuessedNumber newGuess = new GuessedNumber();
             Outcome guessOutcome = Outcome.Indefinite;
+            newGuess.Number = guess;
+            newGuess.Outcome = guessOutcome;
+            _guessedNumbers.Add(newGuess);
             Count++;
+
             if (Count <= MaxNumberOfGuesses)
             {
                 if (guess != _number)
@@ -113,7 +121,6 @@ namespace NumberGuessingGame.Models
 
             newGuess.Number = guess;
             newGuess.Outcome = guessOutcome;
-            _guessedNumbers.Add(newGuess);
             _lastGuessedNumber = newGuess;
 
             return guessOutcome;

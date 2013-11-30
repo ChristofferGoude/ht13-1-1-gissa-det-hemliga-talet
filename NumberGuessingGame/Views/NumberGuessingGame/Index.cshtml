@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Välkommen!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>         
+    @using (Html.BeginForm("PlayGame", "NumberGuessingGame"))
+    {
+        <input type="submit" value="Starta spelet!" />
+    }
+</div>
+
