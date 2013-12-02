@@ -3,16 +3,12 @@
 @if(Model.SecretNumber.GuessedNumbers != null)
 {
     <p>
-        Antal gissningar: @Model.SecretNumber.Count
-    </p>
-    <p>
-        Tidigare gissningar:
+        <b>Antal gissningar:</b> @Model.SecretNumber.Count<br />
+        <b>Tidigare gissningar:</b>
     </p>
     
     foreach (var Guess in Model.SecretNumber.GuessedNumbers)
     {
-        <p>
-            @Guess.Number. Denna gissning är @Guess.Outcome
-        </p>
-    }    
+        <p>@Guess.Number. Denna gissning är @Guess.Outcome</p>
+    } 
 }
