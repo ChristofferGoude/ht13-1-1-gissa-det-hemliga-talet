@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="Models\SecretNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\SecretNumberViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
@@ -219,6 +220,8 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\NumberGuessingGame\Index.cshtml" />
     <Content Include="Views\NumberGuessingGame\PlayGame.cshtml" />
+    <Content Include="Views\NumberGuessingGame\PreviousGuesses.cshtml" />
+    <Content Include="Views\NumberGuessingGame\GameOver.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

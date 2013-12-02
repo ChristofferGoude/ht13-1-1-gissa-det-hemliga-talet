@@ -1,0 +1,18 @@
+﻿@model NumberGuessingGame.ViewModel.SecretNumberViewModel
+
+@if(Model.SecretNumber.GuessedNumbers != null)
+{
+    <p>
+        Antal gissningar: @Model.SecretNumber.Count
+    </p>
+    <p>
+        Tidigare gissningar:
+    </p>
+    
+    foreach (var Guess in Model.SecretNumber.GuessedNumbers)
+    {
+        <p>
+            @Guess.Number. Denna gissning är @Guess.Outcome
+        </p>
+    }    
+}

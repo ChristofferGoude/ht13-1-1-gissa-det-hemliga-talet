@@ -1,4 +1,5 @@
 ﻿using NumberGuessingGame.Models;
+using NumberGuessingGame.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,9 +28,20 @@ namespace NumberGuessingGame.Controllers
             }
         }
 
+        private SecretNumberViewModel SecretNumberViewModel
+        {
+            get
+            {
+                var secretNumberViewModel = new SecretNumberViewModel { SecretNumber = this.SecretNumber };
+
+                return secretNumberViewModel;
+            }
+        }
+
         // GET: /NumberGuessingGame/Index
         public ActionResult Index()
         {
+            SecretNumber.Initialize();
             return View();
         }
 
@@ -37,24 +49,22 @@ namespace NumberGuessingGame.Controllers
         [HttpPost, ActionName("PlayGame")]
         public ActionResult NewGame()
         {
-            SecretNumber.Initialize();
-
             return RedirectToAction("PlayGame");
         }
 
         // GET: /NumberGuessingGame/PlayGame
         public ActionResult PlayGame()
         {
-            return View(model);
+            return View(SecretNumberViewModel);
         }
 
         // POST: /NumberGuessingGame/
-        [HttpPost]
-        public ActionResult PlayGame(int guess)
+        [HttpPost, ActionName("NewGuess")]
+        public ActionResult NewGuess(SecretNumberViewModel ViewModel)
         {
-            model.MakeGuess(guess);
+            SecretNumber.MakeGuess(ViewModel.Guess);
 
-            return RedirectToAction("PlayGame", model);
+            return RedirectToAction("PlayGame");
         }
     }
 }
