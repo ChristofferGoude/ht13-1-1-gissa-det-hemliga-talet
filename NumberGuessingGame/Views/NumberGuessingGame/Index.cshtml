@@ -4,24 +4,30 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "Ett fel har uppstått, var vänlig åtgärda detta och försök igen")
-        <div>
-            @Html.LabelFor(model => Model.Guess, "Skriv din gissning här ")
-        </div>
-        <div>
-            @Html.TextBoxFor(model => Model.Guess)
-            @Html.ValidationMessageFor(model => Model.Guess)
-        </div>
-        <input type="submit" name="NewGuess" value="Gissa!" />
-    }
-</div>
-@if(!Model.SecretNumber.CanMakeGuess)
+@if(Model.SecretNumber.CanMakeGuess)
+{
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "Ett fel har uppstått, var vänlig åtgärda detta och försök igen")
+            <div>
+                @Html.LabelFor(model => Model.Guess, "Skriv din gissning här ")
+            </div>
+            <div>
+                <input type="submit" name="NewGuess" value="Gissa!" />
+                @Html.TextBoxFor(model => Model.Guess)
+                @Html.ValidationMessageFor(model => Model.Guess)
+            </div>
+        }
+    </div>
+}
+else
 {
     {Html.RenderPartial("GameOver", Model);}
+    using (Html.BeginForm("NewGame", "NumberGuessingGame"))
+    {
+        <input type="submit" name="NewGame" value="Nytt spel!" />
+    }
 }
 @{Html.RenderPartial("PreviousGuesses", Model);}

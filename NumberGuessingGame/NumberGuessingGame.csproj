@@ -216,12 +216,10 @@
     </Content>
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\NumberGuessingGame\Index.cshtml" />
-    <Content Include="Views\NumberGuessingGame\PlayGame.cshtml" />
     <Content Include="Views\NumberGuessingGame\PreviousGuesses.cshtml" />
     <Content Include="Views\NumberGuessingGame\GameOver.cshtml" />
+    <Content Include="Views\NumberGuessingGame\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

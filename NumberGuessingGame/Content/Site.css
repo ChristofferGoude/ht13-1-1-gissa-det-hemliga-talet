@@ -1,14 +1,62 @@
 ﻿body {
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
+    color: #282828;
     background-color: #fff;
+}
+
+ul {
+    list-style:none;
 }
 
 header, footer, nav, section {
     display: block;
 }
 
+p {
+    margin:0;
+}
+
+input {
+    height:30px;
+    border-radius:5px;
+    margin:10px 5px 10px 0;
+}
+
+input[type=text] {
+    height:28px;
+    width:100px;
+    border:1px, solid;
+    padding:0 5px;   
+}
+
+input[type=submit] {
+    width:80px;
+    border:none;
+    background-color:#282828;
+    color:#ddd;
+}
+
+input[type=submit]:hover {
+    background-color:#6aa354;
+}
+
+/*Egna klasser och id'n
+-----------------------------------------------------------*/
+#help {
+    width:700px;
+    background-color:#282828;
+    color:#ddd;
+    margin:10px 0 10px 0;
+    padding:5px 10px;
+    border-radius:5px;
+}
+
+.validation-summary-errors {
+    margin:10px 0;
+}
+
+/*---------------------------------------------------------*/
 
 /* Styles for basic forms
 -----------------------------------------------------------*/

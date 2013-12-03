@@ -10,6 +10,7 @@ namespace NumberGuessingGame.Controllers
 {
     public class NumberGuessingGameController : Controller
     {
+
         private SecretNumber SecretNumber
         {
             get
@@ -19,6 +20,7 @@ namespace NumberGuessingGame.Controllers
                 {
                     secretNumber = new SecretNumber();
                     Session["secretNumber"] = secretNumber;
+                    secretNumber.Initialize();
                 }
                 return secretNumber;
             }
@@ -38,33 +40,40 @@ namespace NumberGuessingGame.Controllers
             }
         }
 
-        // GET: /NumberGuessingGame/Index
+        // GET
         public ActionResult Index()
         {
-            SecretNumber.Initialize();
-            return View();
+            return View("Index", SecretNumberViewModel);
         }
 
-        // POST: /NumberGuessingGame/NewGame
-        [HttpPost, ActionName("PlayGame")]
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(SecretNumberViewModel model)
+        {
+            if (!SecretNumberViewModel.SecretNumber.HasGameStarted)
+            {
+                SecretNumberViewModel.SecretNumber.Initialize();
+            }
+            try
+            {
+                if (SecretNumberViewModel.SecretNumber.CanMakeGuess && ModelState.IsValid)
+                {
+                    SecretNumberViewModel.SecretNumber.MakeGuess(model.Guess);
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("Guess", "Gissningen måste vara ett heltal");
+            }
+            return View("Index", SecretNumberViewModel);
+        }
+
+        [HttpPost, ActionName("NewGame")]
         public ActionResult NewGame()
         {
-            return RedirectToAction("PlayGame");
-        }
-
-        // GET: /NumberGuessingGame/PlayGame
-        public ActionResult PlayGame()
-        {
-            return View(SecretNumberViewModel);
-        }
-
-        // POST: /NumberGuessingGame/
-        [HttpPost, ActionName("NewGuess")]
-        public ActionResult NewGuess(SecretNumberViewModel ViewModel)
-        {
-            SecretNumber.MakeGuess(ViewModel.Guess);
-
-            return RedirectToAction("PlayGame");
+            SecretNumberViewModel.SecretNumber.Initialize();
+            return RedirectToAction("Index");
         }
     }
 }

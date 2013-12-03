@@ -18,7 +18,7 @@ namespace NumberGuessingGame.ViewModel
         }
 
         [Required(ErrorMessage="Du måste ange en gissning!")]
-        [Range(1, 100)]
+        [Range(1, 100, ErrorMessage="Din gissning måste ligga mellan 1 och 100!")]
         public int Guess
         {
             get;

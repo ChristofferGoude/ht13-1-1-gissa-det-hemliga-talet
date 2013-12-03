@@ -7,8 +7,12 @@
         <b>Tidigare gissningar:</b>
     </p>
     
-    foreach (var Guess in Model.SecretNumber.GuessedNumbers)
-    {
-        <p>@Guess.Number. Denna gissning är @Guess.Outcome</p>
-    } 
+    <td>
+        @foreach (var Guess in Model.SecretNumber.GuessedNumbers)
+        {
+            <tr>
+                <p>@Guess.Number. Denna gissning är @Guess.Outcome</p>
+            </tr>
+        }
+    </td>
 }

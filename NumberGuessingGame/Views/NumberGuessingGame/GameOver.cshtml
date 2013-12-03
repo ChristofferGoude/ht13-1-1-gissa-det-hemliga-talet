@@ -1,5 +1,17 @@
 ﻿@model NumberGuessingGame.ViewModel.SecretNumberViewModel
 
+@if(Model.SecretNumber.LastGuessedNumber.Number == Model.SecretNumber.Number)
+{
+    <p>
+        Du klarade det på @Model.SecretNumber.Count gissningar! Grattis!
+    </p>
+}
+else
+{
+    <p>
+        Tyvärr lyckades du inte gissa rätt! Bättre lycka nästa gång!
+    </p>    
+}
 <p>
-    Nu är spelet slut! Det hemliga talet var @Model.SecretNumber.Number!
+    Det hemliga talet var @Model.SecretNumber.Number!
 </p>
