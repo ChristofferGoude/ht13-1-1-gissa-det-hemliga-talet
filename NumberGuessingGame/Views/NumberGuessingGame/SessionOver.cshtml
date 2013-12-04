@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "SessionOver";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    Tyvärr verkar det som du tog för lång tid på dig att gissa!
+</p>
+<p>
+    Så kan det gå, men klicka här nedan för att starta en ny spelomgång vetja!
+</p>
+@using (Html.BeginForm("NewGame", "NumberGuessingGame"))
+{
+    <input type="submit" name="NewGame" value="Nytt spel!" />
+}

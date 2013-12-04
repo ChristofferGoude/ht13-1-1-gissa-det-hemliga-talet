@@ -51,6 +51,10 @@ namespace NumberGuessingGame.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(SecretNumberViewModel model)
         {
+            if (Session.IsNewSession)
+            {
+                return View("SessionOver");
+            }
             if (!SecretNumberViewModel.SecretNumber.HasGameStarted)
             {
                 SecretNumberViewModel.SecretNumber.Initialize();
